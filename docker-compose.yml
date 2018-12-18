@@ -1,0 +1,24 @@
+version: "3.5"
+services:
+  keycloak:
+    container_name: keycloak
+    image: jboss/keycloak 
+    environment:
+      - DB_VENDOR=postgres
+      - DB_ADDR=keycloak-pg
+      - DB_USER=postgres
+      - DB_PASSWORD=sa
+      - DB_DATABASE=keycloak
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=Welcome123
+      - SYS_PROPS=-Djboss.http.port=1083 
+    ports:
+      - "1083:1083"
+  postgresql:
+    container_name: keycloak-pg
+    image: postgres
+    restart: always
+    environment: 
+      - POSTGRES_DB=keycloak
+      - POSTGRES_PASSWORD=sa
+
